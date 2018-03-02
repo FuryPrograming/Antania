@@ -2,6 +2,8 @@ package renderEngine;
 
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
+import org.lwjgl.opengl.ContextAttribs;
+import org.lwjgl.opengl.PixelFormat;
 
 public class DisplayManager {
 	
@@ -10,7 +12,15 @@ public class DisplayManager {
 	
 	public static void createDisplay(){
 		
-		Display.setDisplayMode(new DisplayMode(WIDTH, HEIGHT));
+		ContextAttribs attribs = new ContextAttribs(3,2);
+		
+		try {
+			Display.setDisplayMode(new DisplayMode(WIDTH, HEIGHT));
+			Display.create(new PixelFormat(), attribs);
+			
+		} catch (LWJGLExcpetion e) {
+			e.printStackTrace();	
+		}
 		
 	}
 	
